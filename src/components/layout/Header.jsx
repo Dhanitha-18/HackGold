@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
   Bell, ChevronDown, User, Settings, LogOut, HelpCircle,
-  Gem, Menu, Sparkles
+  Gem, Menu, Sparkles, Calendar
 } from 'lucide-react';
 import { currentUser } from '../../data/mockData';
 
@@ -57,8 +57,14 @@ export default function Header({ onMobileMenuToggle }) {
             </div>
           </div>
 
-          {/* Right section: Reference Rate Pill, Notification Bell, User Avatar */}
+          {/* Right section: Date Badge, Reference Rate Pill, Notification Bell, User Avatar */}
           <div className="flex items-center gap-3 sm:gap-4 shrink-0">
+            {/* Today's Date Chip (Reference design feature) */}
+            <div className="hidden xl:flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-gray-50 border border-gray-200 text-xs font-semibold text-gray-700">
+              <Calendar size={14} className="text-[#C9A44C]" />
+              <span>Today: Friday, 13 Feb 2026</span>
+            </div>
+
             {/* Quick Live Rate Chip */}
             <div
               onClick={() => navigate('/rates')}
