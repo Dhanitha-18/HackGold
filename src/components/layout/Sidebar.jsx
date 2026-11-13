@@ -180,7 +180,7 @@ export default function Sidebar({ collapsed, onToggleCollapse, isMobileOpen, onC
         {/* Desktop collapse toggle floating button */}
         <button
           onClick={onToggleCollapse}
-          className="hidden lg:flex absolute -right-3.5 top-20 w-7 h-7 bg-[#14213D] border-2 border-[#C9A44C] rounded-full items-center justify-center text-[#C9A44C] hover:bg-[#C9A44C] hover:text-[#14213D] shadow-md transition-all cursor-pointer z-50"
+          className="hidden lg:flex absolute -right-3.5 top-5 w-7 h-7 bg-[#14213D] border-2 border-[#C9A44C] rounded-full items-center justify-center text-[#C9A44C] hover:bg-[#C9A44C] hover:text-[#14213D] shadow-md transition-all cursor-pointer z-50"
           title={collapsed ? 'Expand Sidebar' : 'Collapse Sidebar'}
         >
           {collapsed ? <ChevronRight size={14} /> : <ChevronLeft size={14} />}

@@ -54,7 +54,7 @@ export default function Layout({ children }) {
             - Bottom padding: 36px (pb-24 lg:pb-12)
             - Equal left and right breathing space. Never touches the sidebar boundary or browser edge!
           */}
-          <main className="flex-1 w-full px-4 sm:px-6 lg:px-8 py-7 pb-24 lg:pb-12 box-border min-w-0">
+          <main className="flex-1 w-full flex flex-col items-center px-4 sm:px-6 lg:px-8 py-8 pb-24 lg:pb-12 box-border min-w-0">
             {children}
           </main>
         </div>
