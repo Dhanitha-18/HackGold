@@ -27,11 +27,10 @@ export default function Layout({ children }) {
   return (
     <ToastContext.Provider value={addToast}>
       {/* 
-        Pure structural flex layout:
-        - Sidebar is a direct flex child in the flow on desktop (lg:relative / lg:translate-x-0).
-        - Sidebar NEVER uses position:fixed on desktop, so it physically occupies its column (256px or 86px).
-        - The main content area is flex-1 min-w-0, guaranteed to start immediately after the sidebar boundary.
-        - Absolute zero chance of sidebar overlapping or hiding dashboard content!
+        Parent flex container:
+        - Sidebar is a direct in-flow flex child (sticky top-0 h-screen).
+        - Main content column is flex-1 min-w-0.
+        - Page container padding: 32px left/right, 28px top, 36px bottom on desktop (1440px-1700px).
       */}
       <div className="min-h-screen bg-[#FAF8F2] flex flex-row text-gray-800 antialiased selection:bg-[#C9A44C]/30 selection:text-[#14213D] w-full overflow-x-hidden">
         {/* Left Sidebar Component */}
@@ -47,8 +46,15 @@ export default function Layout({ children }) {
           {/* Top Header spans the exact width of the main content column */}
           <Header onMobileMenuToggle={() => setIsMobileOpen(true)} />
 
-          {/* Main Page Content Area */}
-          <main className="flex-1 w-full px-5 sm:px-8 md:px-10 lg:px-12 py-6 md:py-8 pb-24 lg:pb-12 box-border">
+          {/* 
+            Main Page Container:
+            - Left padding: 32px (lg:px-8, sm:px-6, px-4)
+            - Right padding: 32px (lg:px-8, sm:px-6, px-4)
+            - Top padding: 28px (py-7)
+            - Bottom padding: 36px (pb-24 lg:pb-12)
+            - Equal left and right breathing space. Never touches the sidebar boundary or browser edge!
+          */}
+          <main className="flex-1 w-full px-4 sm:px-6 lg:px-8 py-7 pb-24 lg:pb-12 box-border min-w-0">
             {children}
           </main>
         </div>

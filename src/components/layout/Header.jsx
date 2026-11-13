@@ -34,13 +34,14 @@ export default function Header({ onMobileMenuToggle }) {
 
   return (
     <header className="sticky top-0 z-40 bg-white border-b border-gray-200/80 shadow-xs transition-all w-full">
-      <div className="w-full px-4 sm:px-6 md:px-8 lg:px-10">
+      {/* Matched padding with main page container: px-4 sm:px-6 lg:px-8 */}
+      <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-18 gap-4">
           {/* Left section: Hamburger (Mobile) + Current Page Breadcrumb */}
           <div className="flex items-center gap-3 min-w-0">
             <button
               onClick={onMobileMenuToggle}
-              className="lg:hidden p-2 rounded-xl text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors"
+              className="lg:hidden p-2 rounded-xl text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors cursor-pointer"
               title="Open Navigation"
             >
               <Menu size={22} />
@@ -57,11 +58,11 @@ export default function Header({ onMobileMenuToggle }) {
           </div>
 
           {/* Right section: Reference Rate Pill, Notification Bell, User Avatar */}
-          <div className="flex items-center gap-2 sm:gap-4 shrink-0">
+          <div className="flex items-center gap-3 sm:gap-4 shrink-0">
             {/* Quick Live Rate Chip */}
             <div
               onClick={() => navigate('/rates')}
-              className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#FAF8F2] hover:bg-[#C9A44C]/10 border border-[#C9A44C]/30 text-gray-800 transition-colors cursor-pointer"
+              className="hidden md:flex items-center gap-2.5 px-3.5 py-1.5 rounded-xl bg-[#FAF8F2] hover:bg-[#C9A44C]/10 border border-[#C9A44C]/30 text-gray-800 transition-colors cursor-pointer"
               title="Click to view all rates"
             >
               <span className="w-2 h-2 rounded-full bg-[#16865B] animate-pulse" />
@@ -78,7 +79,7 @@ export default function Header({ onMobileMenuToggle }) {
                   setShowNotifications((v) => !v);
                   setShowDropdown(false);
                 }}
-                className="relative p-2.5 rounded-xl text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors"
+                className="relative p-2.5 rounded-xl text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors cursor-pointer"
                 title="Notifications"
               >
                 <Bell size={20} />
@@ -109,7 +110,7 @@ export default function Header({ onMobileMenuToggle }) {
                   <div className="p-2.5 bg-gray-50 text-center border-t border-gray-100">
                     <button
                       onClick={() => setShowNotifications(false)}
-                      className="text-xs text-[#C9A44C] font-bold hover:underline"
+                      className="text-xs text-[#C9A44C] font-bold hover:underline cursor-pointer"
                     >
                       Dismiss
                     </button>
@@ -125,7 +126,7 @@ export default function Header({ onMobileMenuToggle }) {
                   setShowDropdown((v) => !v);
                   setShowNotifications(false);
                 }}
-                className="flex items-center gap-2 p-1.5 rounded-xl hover:bg-gray-100 transition-colors text-left"
+                className="flex items-center gap-2 p-1.5 rounded-xl hover:bg-gray-100 transition-colors text-left cursor-pointer"
               >
                 <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#14213D] to-[#1e3a5f] border-2 border-[#C9A44C] flex items-center justify-center text-[#E5D5A5] font-serif font-bold text-sm shadow-sm">
                   {currentUser.name.charAt(0)}
@@ -149,7 +150,7 @@ export default function Header({ onMobileMenuToggle }) {
                         setShowDropdown(false);
                         navigate('/profile');
                       }}
-                      className="w-full flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+                      className="w-full flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-gray-700 hover:bg-gray-100 rounded-lg transition-colors cursor-pointer"
                     >
                       <User size={15} className="text-[#C9A44C]" /> My Profile & Account
                     </button>
@@ -158,7 +159,7 @@ export default function Header({ onMobileMenuToggle }) {
                         setShowDropdown(false);
                         navigate('/profile?tab=valuations');
                       }}
-                      className="w-full flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+                      className="w-full flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-gray-700 hover:bg-gray-100 rounded-lg transition-colors cursor-pointer"
                     >
                       <Sparkles size={15} className="text-[#C9A44C]" /> My Valuations
                     </button>
@@ -167,7 +168,7 @@ export default function Header({ onMobileMenuToggle }) {
                         setShowDropdown(false);
                         navigate('/profile?tab=certificates');
                       }}
-                      className="w-full flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+                      className="w-full flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-gray-700 hover:bg-gray-100 rounded-lg transition-colors cursor-pointer"
                     >
                       <Sparkles size={15} className="text-[#C9A44C]" /> My Certificates
                     </button>
@@ -176,7 +177,7 @@ export default function Header({ onMobileMenuToggle }) {
                         setShowDropdown(false);
                         navigate('/help');
                       }}
-                      className="w-full flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+                      className="w-full flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-gray-700 hover:bg-gray-100 rounded-lg transition-colors cursor-pointer"
                     >
                       <HelpCircle size={15} className="text-[#C9A44C]" /> Help & Support
                     </button>
@@ -187,7 +188,7 @@ export default function Header({ onMobileMenuToggle }) {
                         setShowDropdown(false);
                         alert('[DEMO] Logout simulated.');
                       }}
-                      className="w-full flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                      className="w-full flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-red-600 hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
                     >
                       <LogOut size={15} /> Logout
                     </button>
