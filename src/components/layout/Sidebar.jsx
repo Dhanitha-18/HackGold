@@ -39,19 +39,28 @@ export default function Sidebar({ collapsed, onToggleCollapse, isMobileOpen, onC
 
   return (
     <>
-      {/* Mobile backdrop overlay */}
+      {/* Mobile backdrop overlay - only active when drawer opened on small screens */}
       {isMobileOpen && (
         <div
-          className="fixed inset-0 bg-black/60 backdrop-blur-xs z-50 lg:hidden transition-opacity"
+          className="fixed inset-0 bg-black/60 backdrop-blur-xs z-40 lg:hidden transition-opacity"
           onClick={onCloseMobile}
         />
       )}
 
-      {/* Sidebar container */}
+      {/* 
+        Sidebar container:
+        - Mobile: fixed off-canvas drawer (z-50, slide-in)
+        - Desktop (lg:): relative flex child (z-30, in document flow, sticky top-0, h-screen)
+        - Expanded width: 250px (w-[250px] shrink-0)
+        - Collapsed width: 86px (w-[86px] shrink-0)
+        - Both states physically occupy their exact column in the flex container!
+      */}
       <aside
+        style={{ width: collapsed ? '86px' : '250px' }}
         className={`
-          fixed top-0 left-0 h-full bg-[#14213D] text-white flex flex-col z-50 transition-all duration-300 ease-in-out border-r border-[#C9A44C]/20 shadow-xl
-          ${collapsed ? 'w-20' : 'w-64'}
+          fixed top-0 left-0 h-screen bg-[#14213D] text-white flex flex-col z-50
+          transition-all duration-300 ease-in-out border-r border-[#C9A44C]/25 shadow-xl shrink-0
+          lg:static lg:z-30 lg:h-screen lg:sticky
           ${isMobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
         `}
       >
@@ -112,7 +121,7 @@ export default function Sidebar({ collapsed, onToggleCollapse, isMobileOpen, onC
                     ? 'bg-[#C9A44C] text-[#14213D] font-bold shadow-md'
                     : 'text-gray-300 hover:bg-white/10 hover:text-white font-medium'
                   }
-                  ${collapsed ? 'justify-center' : ''}
+                  ${collapsed ? 'justify-center px-2' : ''}
                 `}
               >
                 <Icon size={19} className={`shrink-0 ${isActive ? 'text-[#14213D]' : 'text-gray-400 group-hover:text-white'}`} />
@@ -131,7 +140,7 @@ export default function Sidebar({ collapsed, onToggleCollapse, isMobileOpen, onC
 
                 {/* Floating tooltip when collapsed */}
                 {collapsed && (
-                  <div className="fixed left-20 ml-2 px-3 py-1.5 text-xs bg-[#14213D] text-white border border-[#C9A44C]/30 rounded-lg shadow-xl opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity z-50 whitespace-nowrap">
+                  <div className="absolute left-full ml-3 px-3 py-1.5 text-xs bg-[#14213D] text-white border border-[#C9A44C]/40 rounded-lg shadow-xl opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity z-50 whitespace-nowrap">
                     {item.label}
                   </div>
                 )}
@@ -148,7 +157,7 @@ export default function Sidebar({ collapsed, onToggleCollapse, isMobileOpen, onC
             className={({ isActive }) => `
               flex items-center gap-3 px-3 py-2 rounded-xl text-xs transition-colors
               ${isActive ? 'bg-white/10 text-white font-bold' : 'text-gray-400 hover:bg-white/5 hover:text-gray-200'}
-              ${collapsed ? 'justify-center' : ''}
+              ${collapsed ? 'justify-center px-2' : ''}
             `}
             title={collapsed ? 'Help & Support' : undefined}
           >
@@ -159,7 +168,7 @@ export default function Sidebar({ collapsed, onToggleCollapse, isMobileOpen, onC
           <button
             onClick={handleLogout}
             className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-colors ${
-              collapsed ? 'justify-center' : ''
+              collapsed ? 'justify-center px-2' : ''
             }`}
             title={collapsed ? 'Logout' : undefined}
           >

@@ -26,8 +26,15 @@ export default function Layout({ children }) {
 
   return (
     <ToastContext.Provider value={addToast}>
-      <div className="min-h-screen bg-[#FAF8F2] flex flex-row text-gray-800 antialiased selection:bg-[#C9A44C]/30 selection:text-[#14213D] relative overflow-x-hidden">
-        {/* Left Sidebar (Desktop persistent, Mobile drawer) */}
+      {/* 
+        Pure structural flex layout:
+        - Sidebar is a direct flex child in the flow on desktop (lg:relative / lg:translate-x-0).
+        - Sidebar NEVER uses position:fixed on desktop, so it physically occupies its column (256px or 86px).
+        - The main content area is flex-1 min-w-0, guaranteed to start immediately after the sidebar boundary.
+        - Absolute zero chance of sidebar overlapping or hiding dashboard content!
+      */}
+      <div className="min-h-screen bg-[#FAF8F2] flex flex-row text-gray-800 antialiased selection:bg-[#C9A44C]/30 selection:text-[#14213D] w-full overflow-x-hidden">
+        {/* Left Sidebar Component */}
         <Sidebar
           collapsed={collapsed}
           onToggleCollapse={() => setCollapsed((v) => !v)}
@@ -35,26 +42,18 @@ export default function Layout({ children }) {
           onCloseMobile={() => setIsMobileOpen(false)}
         />
 
-        {/* Right Content Area:
-            - flex-1 and min-w-0 ensures proper flexbox shrinking/expansion without overflow.
-            - marginLeft smoothly tracks sidebar width on desktop (w-64 = 16rem = 256px, w-20 = 5rem = 80px).
-            - on mobile (lg:hidden), sidebar is an off-canvas drawer, so ml is 0.
-        */}
-        <div
-          className={`flex-1 min-w-0 flex flex-col transition-[margin-left] duration-300 ease-in-out ${
-            collapsed ? 'lg:ml-20' : 'lg:ml-64'
-          }`}
-        >
-          {/* Top Header spans the full width of the main content area */}
+        {/* Right Main Content Column */}
+        <div className="flex-1 min-w-0 flex flex-col min-h-screen bg-[#FAF8F2]">
+          {/* Top Header spans the exact width of the main content column */}
           <Header onMobileMenuToggle={() => setIsMobileOpen(true)} />
 
-          {/* Main page content area: Full width of the remaining viewport with healthy padding */}
-          <main className="flex-1 w-full px-4 sm:px-6 md:px-8 lg:px-10 py-6 md:py-8 pb-24 lg:pb-12 box-border">
+          {/* Main Page Content Area */}
+          <main className="flex-1 w-full px-5 sm:px-8 md:px-10 lg:px-12 py-6 md:py-8 pb-24 lg:pb-12 box-border">
             {children}
           </main>
         </div>
 
-        {/* Mobile Bottom Navigation (only visible on mobile screens < 768px) */}
+        {/* Mobile Bottom Navigation (only on mobile viewports < 768px) */}
         <BottomNav />
 
         {/* Global Toast Notifications */}

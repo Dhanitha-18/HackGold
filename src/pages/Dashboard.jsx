@@ -12,23 +12,23 @@ export default function Dashboard() {
   return (
     <div className="space-y-6 md:space-y-8 animate-fade-in w-full">
       {/* Welcome Greeting Strip (Spans full available width) */}
-      <div className="w-full flex flex-col md:flex-row md:items-center justify-between gap-4 bg-gradient-to-r from-white via-white to-[#FAF8F2] border border-gray-200/80 rounded-2xl p-5 md:p-6 shadow-xs">
-        <div>
-          <div className="flex items-center gap-2 mb-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#C9A44C] animate-pulse" />
+      <div className="w-full flex flex-col md:flex-row md:items-center justify-between gap-4 bg-gradient-to-r from-white via-white to-[#FAF8F2] border border-gray-200/80 rounded-2xl p-6 md:p-8 shadow-xs">
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center gap-2 mb-2">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#C9A44C] animate-pulse shrink-0" />
             <span className="text-xs font-bold text-[#8B6914] uppercase tracking-wider">
               GOLDTRUST AI • Customer Portal
             </span>
           </div>
-          <h1 className="font-serif text-2xl md:text-3xl font-bold text-gray-900 leading-tight">
+          <h1 className="font-serif text-2xl sm:text-3xl font-bold text-gray-900 leading-tight">
             Welcome back, {currentUser.name}!
           </h1>
-          <p className="text-sm text-gray-600 mt-1 max-w-2xl leading-relaxed">
+          <p className="text-sm text-gray-600 mt-1.5 max-w-2xl leading-relaxed">
             Verify purity, calculate true intrinsic worth, and analyze jeweller deduction transparency before selling or buying old gold.
           </p>
         </div>
 
-        <div className="flex items-center gap-4 pt-3 md:pt-0 border-t md:border-t-0 border-gray-100 shrink-0">
+        <div className="flex items-center gap-4 pt-4 md:pt-0 border-t md:border-t-0 border-gray-100 shrink-0">
           <div className="text-left md:text-right">
             <p className="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Reference 24K Rate</p>
             <p className="text-lg md:text-xl font-bold text-[#14213D]">₹10,000 <span className="text-xs font-medium text-gray-500">/ g</span></p>
@@ -36,7 +36,7 @@ export default function Dashboard() {
           </div>
           <button
             onClick={() => navigate('/rates')}
-            className="p-3 rounded-2xl bg-white hover:bg-[#FAF8F2] text-[#14213D] hover:text-[#C9A44C] transition-all border border-gray-200 shadow-xs hover:shadow-md cursor-pointer"
+            className="p-3 rounded-2xl bg-white hover:bg-[#FAF8F2] text-[#14213D] hover:text-[#C9A44C] transition-all border border-gray-200 shadow-xs hover:shadow-md cursor-pointer shrink-0"
             title="View All Rates"
           >
             <ArrowUpRight size={18} />
@@ -53,17 +53,17 @@ export default function Dashboard() {
             </h2>
             <p className="text-xs text-gray-500">Select a feature to get started</p>
           </div>
-          <span className="text-xs font-semibold text-[#8B6914] bg-[#C9A44C]/15 px-2.5 py-1 rounded-full">
+          <span className="text-xs font-semibold text-[#8B6914] bg-[#C9A44C]/15 px-3 py-1 rounded-full">
             4 Core Modules
           </span>
         </div>
 
         {/* 2-Column Responsive Grid with Equal Widths: grid-cols-1 md:grid-cols-2 */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
           {/* CARD 1: SELL OLD GOLD (PRIMARY FEATURE) */}
           <div
             onClick={() => navigate('/sell')}
-            className="group relative bg-white hover:bg-[#FAF8F2]/60 border-2 border-[#C9A44C]/40 hover:border-[#C9A44C] rounded-2xl p-6 md:p-7 shadow-xs hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col justify-between overflow-hidden"
+            className="group relative bg-white hover:bg-[#FAF8F2]/60 border-2 border-[#C9A44C]/40 hover:border-[#C9A44C] rounded-2xl p-6 md:p-8 shadow-xs hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col justify-between overflow-hidden"
           >
             <div className="absolute -top-12 -right-12 w-36 h-36 rounded-full bg-[#C9A44C]/10 group-hover:scale-125 transition-transform duration-500 pointer-events-none" />
 
@@ -85,7 +85,7 @@ export default function Dashboard() {
               <h3 className="font-serif text-xl md:text-2xl font-bold text-gray-900 group-hover:text-[#14213D] transition-colors">
                 Sell Old Gold
               </h3>
-              <p className="text-sm text-gray-600 mt-2 leading-relaxed">
+              <p className="text-sm text-gray-600 mt-2.5 leading-relaxed">
                 Get a transparent valuation for your old gold jewellery with our guided 6-step workflow, net weight deduction analysis, and simulated AI check.
               </p>
             </div>
@@ -99,7 +99,7 @@ export default function Dashboard() {
           {/* CARD 2: BUY NEW GOLD (COMING SOON) */}
           <div
             onClick={() => navigate('/buy')}
-            className="group relative bg-white hover:bg-[#FAF8F2]/60 border-2 border-gray-200 hover:border-[#14213D]/60 rounded-2xl p-6 md:p-7 shadow-xs hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col justify-between overflow-hidden"
+            className="group relative bg-white hover:bg-[#FAF8F2]/60 border-2 border-gray-200 hover:border-[#14213D]/60 rounded-2xl p-6 md:p-8 shadow-xs hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col justify-between overflow-hidden"
           >
             <div className="absolute -top-12 -right-12 w-36 h-36 rounded-full bg-[#14213D]/5 group-hover:scale-125 transition-transform duration-500 pointer-events-none" />
 
@@ -121,7 +121,7 @@ export default function Dashboard() {
               <h3 className="font-serif text-xl md:text-2xl font-bold text-gray-900 group-hover:text-[#14213D] transition-colors">
                 Buy New Gold
               </h3>
-              <p className="text-sm text-gray-600 mt-2 leading-relaxed">
+              <p className="text-sm text-gray-600 mt-2.5 leading-relaxed">
                 Explore gold jewellery with transparent purity and hallmark details. Curated collections with zero hidden cuts and verified digital authenticity certificates.
               </p>
             </div>
@@ -135,7 +135,7 @@ export default function Dashboard() {
           {/* CARD 3: VERIFY HUID */}
           <div
             onClick={() => navigate('/huid')}
-            className="group relative bg-white hover:bg-[#FAF8F2]/60 border-2 border-gray-200 hover:border-emerald-500/60 rounded-2xl p-6 md:p-7 shadow-xs hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col justify-between overflow-hidden"
+            className="group relative bg-white hover:bg-[#FAF8F2]/60 border-2 border-gray-200 hover:border-emerald-500/60 rounded-2xl p-6 md:p-8 shadow-xs hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col justify-between overflow-hidden"
           >
             <div className="absolute -top-12 -right-12 w-36 h-36 rounded-full bg-emerald-500/5 group-hover:scale-125 transition-transform duration-500 pointer-events-none" />
 
@@ -157,7 +157,7 @@ export default function Dashboard() {
               <h3 className="font-serif text-xl md:text-2xl font-bold text-gray-900 group-hover:text-[#14213D] transition-colors">
                 Verify HUID
               </h3>
-              <p className="text-sm text-gray-600 mt-2 leading-relaxed">
+              <p className="text-sm text-gray-600 mt-2.5 leading-relaxed">
                 Check hallmark and 6-digit HUID details of your jewellery. Look up hallmarking center records, jeweller registration, and stamping date.
               </p>
             </div>
@@ -171,7 +171,7 @@ export default function Dashboard() {
           {/* CARD 4: TODAY'S GOLD RATES */}
           <div
             onClick={() => navigate('/rates')}
-            className="group relative bg-white hover:bg-[#FAF8F2]/60 border-2 border-gray-200 hover:border-amber-500/60 rounded-2xl p-6 md:p-7 shadow-xs hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col justify-between overflow-hidden"
+            className="group relative bg-white hover:bg-[#FAF8F2]/60 border-2 border-gray-200 hover:border-amber-500/60 rounded-2xl p-6 md:p-8 shadow-xs hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col justify-between overflow-hidden"
           >
             <div className="absolute -top-12 -right-12 w-36 h-36 rounded-full bg-amber-500/5 group-hover:scale-125 transition-transform duration-500 pointer-events-none" />
 
@@ -193,7 +193,7 @@ export default function Dashboard() {
               <h3 className="font-serif text-xl md:text-2xl font-bold text-gray-900 group-hover:text-[#14213D] transition-colors">
                 Today's Gold Rates
               </h3>
-              <p className="text-sm text-gray-600 mt-2 leading-relaxed">
+              <p className="text-sm text-gray-600 mt-2.5 leading-relaxed">
                 Stay updated with indicative gold prices across 24K, 22K, 20K, 18K and 14K purities. Compare 1g and 10g rates for informed selling decisions.
               </p>
             </div>
@@ -217,7 +217,7 @@ export default function Dashboard() {
 
         <div
           onClick={() => navigate('/profile')}
-          className="group relative bg-white hover:bg-[#FAF8F2]/60 border-2 border-gray-200 hover:border-[#14213D] rounded-2xl p-6 md:p-7 shadow-xs hover:shadow-xl transition-all duration-300 cursor-pointer overflow-hidden w-full"
+          className="group relative bg-white hover:bg-[#FAF8F2]/60 border-2 border-gray-200 hover:border-[#14213D] rounded-2xl p-6 md:p-8 shadow-xs hover:shadow-xl transition-all duration-300 cursor-pointer overflow-hidden w-full"
         >
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
             <div className="flex items-start sm:items-center gap-4 sm:gap-5 min-w-0">
