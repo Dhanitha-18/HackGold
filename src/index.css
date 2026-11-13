@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap');
+
+@import "tailwindcss";
+
+:root {
+  --gold-primary: #C9A44C;
+  --gold-secondary: #E5D5A5;
+  --navy-deep: #14213D;
+  --bg-dark: #101827;
+  --ivory-warm: #FAF8F2;
+  --text-primary: #1F2937;
+  --text-secondary: #6B7280;
+  --success: #16865B;
+  --warning: #D99A32;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', 'Manrope', sans-serif;
+  background-color: var(--ivory-warm);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-serif {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #C9A44C;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #b8923a;
+}
+
+/* Transitions */
+.transition-all {
+  transition: all 0.2s ease;
+}
+
+/* Gold gradient */
+.gold-gradient {
+  background: linear-gradient(135deg, #C9A44C 0%, #E5D5A5 50%, #C9A44C 100%);
+}
+
+/* Navy gradient */
+.navy-gradient {
+  background: linear-gradient(135deg, #14213D 0%, #1e3a5f 100%);
+}
+
+/* Card shadow */
+.card-shadow {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.06);
+}
+
+.card-shadow-md {
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05), 0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* Input focus */
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #C9A44C;
+  box-shadow: 0 0 0 3px rgba(201, 164, 76, 0.1);
+}
+
+/* Premium button */
+.btn-gold {
+  background: linear-gradient(135deg, #C9A44C, #b8923a);
+  color: white;
+  font-weight: 600;
+  padding: 0.625rem 1.5rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.875rem;
+  letter-spacing: 0.01em;
+}
+
+.btn-gold:hover {
+  background: linear-gradient(135deg, #b8923a, #a07d2e);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(201, 164, 76, 0.4);
+}
+
+.btn-gold:active {
+  transform: translateY(0);
+}
+
+.btn-navy {
+  background: #14213D;
+  color: white;
+  font-weight: 600;
+  padding: 0.625rem 1.5rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.875rem;
+}
+
+.btn-navy:hover {
+  background: #1e3a5f;
+  transform: translateY(-1px);
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-slide-in {
+  animation: slideIn 0.25s ease;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
