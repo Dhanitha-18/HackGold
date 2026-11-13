@@ -112,7 +112,7 @@ export default function SellOldGold() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto space-y-6 animate-fade-in">
+    <div className="max-w-4xl mx-auto space-y-6 animate-fade-in w-full">
       {/* Header */}
       <div>
         <h1 className="text-2xl font-bold text-gray-800">Sell Old Gold</h1>

@@ -1,63 +1,37 @@
 import React from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import {
   LayoutDashboard,
-  ShoppingBag,
+  Scale,
+  Gem,
+  Search,
+  TrendingUp,
+  User,
   ClipboardList,
   FileText,
-  Search,
-  User,
   HelpCircle,
   LogOut,
   ChevronLeft,
   ChevronRight,
-  Gem,
   X,
+  Sparkles
 } from 'lucide-react';
+import { currentUser } from '../../data/mockData';
 
 const navItems = [
   { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
-  { to: '/sell', icon: ShoppingBag, label: 'Sell Old Gold' },
+  { to: '/sell', icon: Scale, label: 'Sell Old Gold', badge: 'Primary' },
+  { to: '/buy', icon: Gem, label: 'Buy New Gold', badge: 'Soon' },
+  { to: '/huid', icon: Search, label: 'Verify HUID' },
+  { to: '/rates', icon: TrendingUp, label: "Today's Rates" },
   { to: '/valuations', icon: ClipboardList, label: 'My Valuations' },
   { to: '/certificates', icon: FileText, label: 'My Certificates' },
-  { to: '/huid', icon: Search, label: 'HUID Verification' },
   { to: '/profile', icon: User, label: 'My Profile' },
 ];
 
-const NavItem = ({ to, icon: Icon, label, collapsed, onClick }) => (
-  <NavLink
-    to={to}
-    onClick={onClick}
-    className={({ isActive }) =>
-      `flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 group relative
-      ${isActive
-        ? 'bg-[#C9A44C]/15 text-[#C9A44C] font-semibold'
-        : 'text-gray-300 hover:bg-white/8 hover:text-white'
-      }`
-    }
-    title={collapsed ? label : undefined}
-  >
-    {({ isActive }) => (
-      <>
-        {isActive && (
-          <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 bg-[#C9A44C] rounded-r-full" />
-        )}
-        <Icon size={18} className="shrink-0" />
-        {!collapsed && (
-          <span className="text-sm truncate">{label}</span>
-        )}
-        {collapsed && (
-          <span className="absolute left-full ml-3 px-2 py-1 text-xs bg-[#1e3a5f] text-white rounded opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap z-50 shadow-lg">
-            {label}
-          </span>
-        )}
-      </>
-    )}
-  </NavLink>
-);
-
 export default function Sidebar({ collapsed, onToggleCollapse, isMobileOpen, onCloseMobile }) {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogout = () => {
     alert('[DEMO] Logout functionality will be connected to authentication in a later stage.');
@@ -65,83 +39,142 @@ export default function Sidebar({ collapsed, onToggleCollapse, isMobileOpen, onC
 
   return (
     <>
-      {/* Mobile overlay */}
+      {/* Mobile backdrop overlay */}
       {isMobileOpen && (
         <div
-          className="fixed inset-0 bg-black/50 z-30 lg:hidden"
+          className="fixed inset-0 bg-black/60 backdrop-blur-xs z-50 lg:hidden transition-opacity"
           onClick={onCloseMobile}
         />
       )}
 
-      {/* Sidebar */}
+      {/* Sidebar container */}
       <aside
         className={`
-          fixed top-0 left-0 h-full bg-[#14213D] flex flex-col z-40 transition-all duration-300
-          ${collapsed ? 'w-16' : 'w-64'}
+          fixed top-0 left-0 h-full bg-[#14213D] text-white flex flex-col z-50 transition-all duration-300 ease-in-out border-r border-[#C9A44C]/20 shadow-xl
+          ${collapsed ? 'w-20' : 'w-64'}
           ${isMobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
         `}
       >
-        {/* Logo */}
-        <div className={`flex items-center gap-3 px-4 py-5 border-b border-white/10 ${collapsed ? 'justify-center' : ''}`}>
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#C9A44C] to-[#b8923a] flex items-center justify-center shrink-0">
-            <Gem size={16} className="text-white" />
-          </div>
-          {!collapsed && (
-            <div>
-              <h1 className="text-white font-bold text-sm leading-tight tracking-wide">GOLDTRUST AI</h1>
-              <p className="text-[#C9A44C] text-[10px] font-medium tracking-widest uppercase">Know Your Gold</p>
+        {/* Brand Header */}
+        <div className={`flex items-center gap-3 px-4 py-5 border-b border-white/10 ${collapsed ? 'justify-center' : 'justify-between'}`}>
+          <div
+            onClick={() => {
+              navigate('/dashboard');
+              onCloseMobile();
+            }}
+            className="flex items-center gap-3 cursor-pointer group min-w-0"
+          >
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#C9A44C] to-[#DDAA35] flex items-center justify-center shrink-0 shadow-md group-hover:scale-105 transition-transform">
+              <Gem size={20} className="text-white" />
             </div>
-          )}
-          {/* Mobile close */}
+            {!collapsed && (
+              <div className="min-w-0">
+                <h1 className="text-white font-serif font-bold text-base leading-tight tracking-wider truncate">
+                  GOLDTRUST <span className="text-[#C9A44C]">AI</span>
+                </h1>
+                <p className="text-[#C9A44C] text-[10px] font-semibold tracking-widest uppercase">
+                  Know Your Gold
+                </p>
+              </div>
+            )}
+          </div>
+
+          {/* Close button on mobile */}
           <button
             onClick={onCloseMobile}
-            className="ml-auto text-gray-400 hover:text-white lg:hidden"
+            className="p-1.5 rounded-lg text-gray-400 hover:text-white hover:bg-white/10 lg:hidden transition-colors"
           >
             <X size={18} />
           </button>
         </div>
 
-        {/* Nav items */}
-        <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
+        {/* Navigation Links */}
+        <nav className="flex-1 px-3 py-4 space-y-1.5 overflow-y-auto overflow-x-hidden">
           {!collapsed && (
-            <p className="text-gray-500 text-[10px] uppercase tracking-widest font-semibold px-3 mb-3">
-              Navigation
+            <p className="text-gray-400 text-[10px] uppercase tracking-widest font-bold px-3 mb-2">
+              Menu
             </p>
           )}
-          {navItems.map(item => (
-            <NavItem
-              key={item.to}
-              {...item}
-              collapsed={collapsed}
-              onClick={onCloseMobile}
-            />
-          ))}
+
+          {navItems.map((item) => {
+            const Icon = item.icon;
+            const isActive = location.pathname === item.to;
+
+            return (
+              <NavLink
+                key={item.to}
+                to={item.to}
+                onClick={onCloseMobile}
+                title={collapsed ? item.label : undefined}
+                className={`
+                  flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 group relative
+                  ${isActive
+                    ? 'bg-[#C9A44C] text-[#14213D] font-bold shadow-md'
+                    : 'text-gray-300 hover:bg-white/10 hover:text-white font-medium'
+                  }
+                  ${collapsed ? 'justify-center' : ''}
+                `}
+              >
+                <Icon size={19} className={`shrink-0 ${isActive ? 'text-[#14213D]' : 'text-gray-400 group-hover:text-white'}`} />
+
+                {!collapsed && (
+                  <span className="text-xs truncate flex-1">{item.label}</span>
+                )}
+
+                {!collapsed && item.badge && (
+                  <span className={`text-[9px] px-1.5 py-0.5 rounded-md font-bold uppercase tracking-wider ${
+                    isActive ? 'bg-[#14213D] text-[#E5D5A5]' : 'bg-[#C9A44C]/20 text-[#E5D5A5]'
+                  }`}>
+                    {item.badge}
+                  </span>
+                )}
+
+                {/* Floating tooltip when collapsed */}
+                {collapsed && (
+                  <div className="fixed left-20 ml-2 px-3 py-1.5 text-xs bg-[#14213D] text-white border border-[#C9A44C]/30 rounded-lg shadow-xl opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity z-50 whitespace-nowrap">
+                    {item.label}
+                  </div>
+                )}
+              </NavLink>
+            );
+          })}
         </nav>
 
-        {/* Bottom items */}
-        <div className="border-t border-white/10 px-3 py-3 space-y-1">
-          <NavItem
+        {/* Footer info & Logout */}
+        <div className="border-t border-white/10 p-3 space-y-1">
+          <NavLink
             to="/help"
-            icon={HelpCircle}
-            label="Help & Support"
-            collapsed={collapsed}
             onClick={onCloseMobile}
-          />
+            className={({ isActive }) => `
+              flex items-center gap-3 px-3 py-2 rounded-xl text-xs transition-colors
+              ${isActive ? 'bg-white/10 text-white font-bold' : 'text-gray-400 hover:bg-white/5 hover:text-gray-200'}
+              ${collapsed ? 'justify-center' : ''}
+            `}
+            title={collapsed ? 'Help & Support' : undefined}
+          >
+            <HelpCircle size={17} className="shrink-0" />
+            {!collapsed && <span>Help & Support</span>}
+          </NavLink>
+
           <button
             onClick={handleLogout}
-            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-red-500/10 hover:text-red-400 transition-all text-sm ${collapsed ? 'justify-center' : ''}`}
+            className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-colors ${
+              collapsed ? 'justify-center' : ''
+            }`}
+            title={collapsed ? 'Logout' : undefined}
           >
-            <LogOut size={18} className="shrink-0" />
+            <LogOut size={17} className="shrink-0" />
             {!collapsed && <span>Logout</span>}
           </button>
         </div>
 
-        {/* Collapse toggle — desktop only */}
+        {/* Desktop collapse toggle floating button */}
         <button
           onClick={onToggleCollapse}
-          className="hidden lg:flex absolute -right-3 top-20 w-6 h-6 bg-[#14213D] border border-white/20 rounded-full items-center justify-center text-gray-400 hover:text-white hover:bg-[#1e3a5f] transition-all"
+          className="hidden lg:flex absolute -right-3.5 top-20 w-7 h-7 bg-[#14213D] border-2 border-[#C9A44C] rounded-full items-center justify-center text-[#C9A44C] hover:bg-[#C9A44C] hover:text-[#14213D] shadow-md transition-all cursor-pointer z-50"
+          title={collapsed ? 'Expand Sidebar' : 'Collapse Sidebar'}
         >
-          {collapsed ? <ChevronRight size={12} /> : <ChevronLeft size={12} />}
+          {collapsed ? <ChevronRight size={14} /> : <ChevronLeft size={14} />}
         </button>
       </aside>
     </>
